@@ -3,6 +3,8 @@ Gem::Specification.new do |s|
   s.version = '0.0.1'
   s.date = %q{2012-10-31}
   s.summary = %q{Return tweet frequency}
+
   s.files = `git ls-files`.split("\n")
+
   s.require_paths = ['lib']
 end
