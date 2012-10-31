@@ -10,8 +10,5 @@ module TweetFrequency
         raise TweetFrequency::Error::ProtectedUser, 'User has protected tweets.'
       end
     end
-
-
-
   end
 end
