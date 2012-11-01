@@ -30,7 +30,7 @@ describe 'TweetFrequency::User' do
     end
 
     it 'should get less than 1000 tweets' do
-      @user.get_timeline(3)
+      @user.get_timeline(1)
       @user.timeline.count.should == 3
     end
 
@@ -38,15 +38,23 @@ describe 'TweetFrequency::User' do
       @user.get_timeline(1234)
       @user.timeline.count.should == 1234
     end
-  end
 
-  context 'Get word frequency' do
-    before do
-      @user = TweetFrequency::User.new('jack')
-    end
+    it 'should not have duplicate tweets' do
+      tweets = {}
+      found = false
 
-    it 'should get the word frequency' do
-      @user.word_frequency
+      # Populate timeline and go through each tweet
+      @user.get_timeline
+      @user.timeline.each do |tweet|
+        if tweets.has_key?(tweet.id)
+          found = true
+          break
+        else
+          tweets[tweet.id] = true
+        end
+      end
+
+      found.should be_false
     end
   end
 end

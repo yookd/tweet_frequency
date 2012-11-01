@@ -4,7 +4,5 @@ Gem::Specification.new do |s|
   s.date = %q{2012-10-31}
   s.summary = %q{Return tweet frequency}
 
-  s.files = `git ls-files`.split("\n")
-
   s.require_paths = ['lib']
 end

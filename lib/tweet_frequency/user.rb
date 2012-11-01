@@ -33,10 +33,9 @@ module TweetFrequency
       # Get the tweets which will be in @timeline
       get_timeline(params[:tweets])
 
-      # Go through each tweet in the timeline
+      # Go through each tweet in the timeline and match words only
       # [key] word => [value] number of times it is used
       @timeline.each do |tweet|
-        puts tweet.text
         tweet.text.split.each do |t|
           word = t.downcase.match(/\w+/).to_s
           if result.has_key?(word)
@@ -46,6 +45,8 @@ module TweetFrequency
           end
         end
       end
+
+      result { |key, value| value }.reverse
     end
 
     # Get user's timeline
@@ -90,14 +91,20 @@ module TweetFrequency
     end
 
     # Format the output
-    def print_word_frequency(result)
+    def print_word_frequency
 
-      # Sort the hash by value
-      result.sort_by{ |key, value| value }.reverse
+      # Call function
+      result = word_frequency
 
-      result.each do |word, count|
+      output = "#{@name} (@#{@screen_name}) has #{@statuses_count} tweets. "
+      output += "Here are his/her most frequently used words in the last 1000 tweets: "
 
+      # Go through each word
+      result.sort_by{ |key, value| value}.reverse.each do |word, count|
+        output += "#{word} (#{count})"
       end
+
+      puts output
     end
   end
 end
