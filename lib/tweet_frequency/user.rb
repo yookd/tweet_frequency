@@ -96,6 +96,7 @@ module TweetFrequency
       # Call function
       result = word_frequency
 
+      # Format output
       output = "#{@name} (@#{@screen_name}) has #{@statuses_count} tweets. "
       output += "Here are his/her most frequently used words in the last 1000 tweets: \n\n"
 

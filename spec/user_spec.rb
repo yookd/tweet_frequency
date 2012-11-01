@@ -22,8 +22,6 @@ describe 'TweetFrequency::User' do
       @user = TweetFrequency::User.new('jack')
     end
 
-    # TO DO:
-    # Change this to 1000 tweets!!!
     it 'should get 1000 tweets' do
       @user.get_timeline
       @user.timeline.count.should == 1000

@@ -1,7 +1,10 @@
 TweetFrequency
 ===============
 
-Print out the most frequently used words in the last 1000 (or less) tweets.
+Print out the most frequently used words in the last 1000 (or less) tweets. 
+
+* Contractions count as two words: `don't`: `don` and `t`.
+* I used my own OAuth keys and access tokens so continuous use might throw a rate-limit error.
 
 ## Setup
 Install the gem:
@@ -45,4 +48,8 @@ rt (337)
 to (285)
 a (191)
 and (191)
+...
 ```
+
+## Conclusion
+This was the first gem I ever made and I must say the experience has been extremely rewarding.  Thank you for exposing me to this!
