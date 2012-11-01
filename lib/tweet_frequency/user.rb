@@ -20,16 +20,35 @@ module TweetFrequency
 
     # Find the most frequently used words in tweet
     #
-    # @param [Hash] options
     # @options [Integer] tweets number of tweets
     # @options [Boolean] include_rts include retweets
-    def word_frequency(options={})
+    def word_frequency
       # Set default parameters
       params = {
         tweets: [@statuses_count, 1000].min,
         include_rts: true
       }
-      params.merge!(options)
+      result = {}
+
+      # Get the tweets which will be in @timeline
+      get_timeline(params[:tweets])
+
+      # Go through each tweet in the timeline
+      # [key] word => [value] number of times it is used
+      @timeline.each do |tweet|
+        tweet.downcase.split.each do |t|
+          words = t.text.match(/w+/)
+          words.each do |word|
+            if result.has_key?(word)
+              result[word] += 1
+            else
+              result[word] = 1
+            end
+          end
+        end
+      end
+
+      puts result
     end
 
     # Get user's timeline
@@ -55,9 +74,20 @@ module TweetFrequency
           # Duplicate tweets
           options[:max_id] = @timeline.last.id unless @timeline.empty?
 
-          tweet = Twitter.user_timeline(@name, options)
+          # max_id gets results with id less than AND equal to so get 1 more tweet
+          # also need to avoid putting in the same tweet
+          if options[:max_id]
+            options[:count] = options[:count] + 1
+            tweets = Twitter.user_timeline(@screen_name, options)
 
-          tweet.each { |t| @timeline.push(t) }
+            # Top tweet is the max_id so delete index 0
+            tweets.shift
+          else
+            tweets = Twitter.user_timeline(@screen_name, options)
+          end
+
+          # Tweets come in an array so add each individually
+          tweets.each { |tweet| @timeline.push(tweet) }
         end
       end
     end
