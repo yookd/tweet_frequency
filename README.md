@@ -5,7 +5,7 @@ Print out the most frequently used words in the last 1000 (or less) tweets.
 
 ## Setup
 Install the gem:
-`gem install tweet_frequency`
+<code>gem install tweet_frequency</code>
 Open up irb:
 `irb`
 Add the gem:
