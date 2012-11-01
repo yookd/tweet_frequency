@@ -37,7 +37,13 @@ module TweetFrequency
       # [key] word => [value] number of times it is used
       @timeline.each do |tweet|
         tweet.text.split.each do |t|
-          word = t.downcase.match(/\w+/).to_s
+
+          # Some matches come out as null so skip if they are nil
+          word = t.downcase.match(/\w(?<!\d)[\w'-]*/)
+          next unless !word
+          word = word[0]
+
+          # Check if word has been added to the result, increment count
           if result.has_key?(word)
             result[word] += 1
           else

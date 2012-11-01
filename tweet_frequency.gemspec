@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{tweet_frequency}
-  s.version = '0.0.0'
+  s.version = '0.0.1'
   s.date = %q{2012-11-01}
   s.description = %q{TweetFrequency will print out the most frequently used words in the most recent 1000 tweets, sorted by descending order.}
   s.summary = %q{Print out most frequently used words in 1000 tweets, sorted by descending order.}
