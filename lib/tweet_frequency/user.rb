@@ -10,7 +10,7 @@ module TweetFrequency
     def initialize(name)
       user = Twitter.user(name)
 
-      raise TweetFrequency::Error::ProtectedUser, 'User has protected tweets.' if user.protected?
+      raise TweetFrequency::ProtectedUser, 'User has protected tweets.' if user.protected?
 
       @name = user.name
       @screen_name = user.screen_name
@@ -46,7 +46,7 @@ module TweetFrequency
         end
       end
 
-      result { |key, value| value }.reverse
+      result.sort_by { |key, value| value }.reverse
     end
 
     # Get user's timeline
@@ -97,11 +97,11 @@ module TweetFrequency
       result = word_frequency
 
       output = "#{@name} (@#{@screen_name}) has #{@statuses_count} tweets. "
-      output += "Here are his/her most frequently used words in the last 1000 tweets: "
+      output += "Here are his/her most frequently used words in the last 1000 tweets: \n\n"
 
       # Go through each word
-      result.sort_by{ |key, value| value}.reverse.each do |word, count|
-        output += "#{word} (#{count})"
+      result.each do |word, count|
+        output += "#{word} (#{count})\n"
       end
 
       puts output

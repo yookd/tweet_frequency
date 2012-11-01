@@ -13,7 +13,7 @@ describe 'TweetFrequency::User' do
 
   context 'Initializing a user with protected tweets' do
     it 'should raise a ProtectedUser error' do
-      expect { @user = TweetFrequency::User.new('yoo_david') }.to raise_error
+      expect { @user = TweetFrequency::User.new('yoo_david') }.to raise_error(TweetFrequency::ProtectedUser)
     end
   end
 
@@ -31,7 +31,7 @@ describe 'TweetFrequency::User' do
 
     it 'should get less than 1000 tweets' do
       @user.get_timeline(1)
-      @user.timeline.count.should == 3
+      @user.timeline.count.should == 1
     end
 
     it 'should get more than 1000 tweets' do
