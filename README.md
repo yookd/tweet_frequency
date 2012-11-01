@@ -43,12 +43,12 @@ Find out the most frequently used words in the last 1000 tweets:
 ```
 Jack Dorsey (@jack) has 12158 tweets. Here are his/her most frequently used words in the last 1000 tweets: 
 
-http (456)
-the (414)
-rt (337)
-to (285)
+http (454)
+the (417)
+rt (338)
+to (286)
+and (192)
 a (191)
-and (191)
 ...
 ```
 
