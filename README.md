@@ -4,6 +4,7 @@ TweetFrequency
 Print out the most frequently used words in the last 1000 (or less) tweets. 
 
 * Contractions count as two words: `don't`: `don` and `t`.
+* Output has been downcased.
 * I used my own OAuth keys and access tokens so continuous use might throw a rate-limit error.
 * You can't access protected tweets so it will throw a `TweetFrequency::ProtectedUser` error.
 
