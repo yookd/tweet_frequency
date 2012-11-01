@@ -1,4 +1,9 @@
 module TweetFrequency
-  class Error < StandardError; end
+  class Error < StandardError
+    def initialize(message)
+      super
+    end
+  end
+
   class ProtectedUser < Error; end
 end
