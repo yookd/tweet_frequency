@@ -46,7 +46,7 @@ module TweetFrequency
 
           # Some matches come out as null so skip if they are nil
           word = t.downcase.match(/\w(?<!\d)[\w'-]*/)
-          next unless !word
+          next unless word
           word = word[0]
 
           # Check if word has been added to the result, increment count
