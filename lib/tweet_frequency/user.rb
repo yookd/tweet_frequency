@@ -58,7 +58,7 @@ module TweetFrequency
         end
       end
 
-      result.sort_by { |key, value| value }.reverse
+      result = result.sort_by { |key, value| value }.reverse
       print_word_frequency(result)
     end
 
