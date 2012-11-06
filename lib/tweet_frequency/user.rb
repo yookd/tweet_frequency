@@ -22,16 +22,22 @@ module TweetFrequency
     #
     # @options [Integer] tweets number of tweets
     # @options [Boolean] include_rts include retweets
-    def word_frequency
-      # Set default parameters
-      params = {
+    # @options []
+    def word_frequency(params={})
+      # Set default options
+      options = {
         tweets: [@statuses_count, 1000].min,
-        include_rts: true
+        include_rts: true,
+        exclude_replies: true
       }
+
+      # Combine the options the user has set
+      options.merge!(params)
+
       result = {}
 
       # Get the tweets which will be in @timeline
-      get_timeline(params[:tweets])
+      get_timeline(options[:tweets])
 
       # Go through each tweet in the timeline and match words only
       # [key] word => [value] number of times it is used
@@ -53,6 +59,7 @@ module TweetFrequency
       end
 
       result.sort_by { |key, value| value }.reverse
+      print_word_frequency(result)
     end
 
     # Get user's timeline
@@ -97,10 +104,7 @@ module TweetFrequency
     end
 
     # Format the output
-    def print_word_frequency
-
-      # Call function
-      result = word_frequency
+    def print_word_frequency(result)
 
       # Format output
       output = "#{@name} (@#{@screen_name}) has #{@statuses_count} tweets. "
