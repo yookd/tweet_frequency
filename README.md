@@ -1,4 +1,4 @@
-TweetFrequency
+TweetFrequency (version 0.0.3)
 ===============
 
 Print out the most frequently used words in the last 1000 (or less) tweets. 
@@ -37,7 +37,18 @@ Specify a user e.g. 'jack':
 Find out the most frequently used words in the last 1000 tweets:
 
 ```ruby
-> user.print_word_frequency
+> user.word_frequency
+```
+
+You can pass arguments to the call now. Note that these are the only options that are available right now:
+
+```ruby
+> options = {
+>   include_rts: true,
+>   exclude_replies: true
+> }
+>
+> user.word_frequency(options)
 ```
 
 ## Example Output
